@@ -57,7 +57,7 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
         timeText.setText(list.get(position).getMedicationTimeToBeTaken().toString());
 
         Button addBtn = (Button)view.findViewById(R.id.taken_btn);
-        addBtn.setEnabled(!list.get(position).isMedicationTaken());
+        //addBtn.setEnabled(!list.get(position).isMedicationTaken());
 
         addBtn.setOnClickListener(new View.OnClickListener(){
             @Override

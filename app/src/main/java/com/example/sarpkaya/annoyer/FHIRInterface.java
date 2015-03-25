@@ -34,10 +34,7 @@ public class FHIRInterface {
 
         FhirContext ctx = FhirContext.forDstu2();
 
-        MedicationAdministration medicationAdministration = new MedicationAdministration();
-
-        medicationAdministration.setEffectiveTime(new DateTimeDt().withCurrentTime()).setStatus(MedicationAdministrationStatusEnum.COMPLETED);
-
+        // create a Medication
         Medication medication = new Medication();
         medication.setName(name);
         List<CodingDt> codedMedicine = new ArrayList<CodingDt>();
@@ -45,10 +42,15 @@ public class FHIRInterface {
         codedMedicine.add(new CodingDt().setDisplay(name).setCode(sctid.toString()).setSystem("http://nehta.gov.au/amt/v3"));
         medication.setCode(new CodeableConceptDt().setCoding(codedMedicine));
 
-//        medicationAdministration.setMedication((ResourceReferenceDt) medication);
 
+        // create an instance of a Medication being applied
+        MedicationAdministration medicationAdministration = new MedicationAdministration();
+        medicationAdministration.setEffectiveTime(new DateTimeDt().withCurrentTime()).setStatus(MedicationAdministrationStatusEnum.COMPLETED);
 
-        String jsonEncoded = ctx.newJsonParser().encodeResourceToString(medication);
+        // set the Medication taken to the Medication resource
+        medicationAdministration.getMedication().setResource(medication);
+
+        String jsonEncoded = ctx.newJsonParser().encodeResourceToString(medicationAdministration);
         Log.d("resource", jsonEncoded);
     }
 }

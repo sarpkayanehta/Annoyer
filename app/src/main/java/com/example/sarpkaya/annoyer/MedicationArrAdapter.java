@@ -9,7 +9,11 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -54,7 +58,8 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
         listItemText.setText(list.get(position).getName());
 
         TextView timeText = (TextView)view.findViewById(R.id.timeText);
-        timeText.setText(list.get(position).getMedicationTimeToBeTaken().toString());
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        timeText.setText(dateFormat.format(list.get(position).getMedicationTimeToBeTaken().getValue()));
 
         Button addBtn = (Button)view.findViewById(R.id.taken_btn);
         //addBtn.setEnabled(!list.get(position).isMedicationTaken());

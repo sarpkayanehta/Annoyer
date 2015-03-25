@@ -41,5 +41,12 @@ public class PatientMedications {
         medicationModel.setMedicationTimeToBeTaken(timeToTakeMedication);
 
         medicationModelList.add(medicationModel);
+
+        medicationModel = new MedicationModel();
+        medicationModel.setName("A");
+        medicationModel.setSctid(653840110000361L);
+        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
+
+        medicationModelList.add(medicationModel);
     }
 }

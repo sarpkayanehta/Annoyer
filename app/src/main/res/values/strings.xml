@@ -4,4 +4,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="medication_title">You can see all the medications that you need to take on the below list:</string>
+    <string name="time_to_take">Time</string>
 </resources>

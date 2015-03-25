@@ -4,6 +4,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import ca.uhn.fhir.context.FhirContext;
 
@@ -14,8 +19,23 @@ public class Medications extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medications);
+        doListStuff();
     }
 
+    private void doListStuff() {
+        //generate list
+        ArrayList<String> list = new ArrayList<String>();
+        for (int i = 0 ; i < 100; i++) {
+            list.add("item " + i);
+        }
+
+        //instantiate custom adapter
+        MedicationArrAdapter adapter = new MedicationArrAdapter(list, this);
+
+        //handle listview and assign adapter
+        ListView lView = (ListView)findViewById(R.id.medicationListView);
+        lView.setAdapter(adapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

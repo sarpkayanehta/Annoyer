@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.dstu.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
 import ca.uhn.fhir.model.dstu2.resource.Medication;
@@ -16,37 +15,39 @@ import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.rest.client.IGenericClient;
 
 
-/**
- * Created by VadimPeretokin on 25/03/15.
- */
 public class FHIRInterface {
     private static FHIRInterface ourInstance = new FHIRInterface();
-    private static FhirContext ctx = FhirContext.forDstu2();
-    String serverBase = "http://fhir-dev.healthintersections.com.au/open";
-    IGenericClient client = ctx.newRestfulGenericClient(serverBase);
+    private static FhirContext ctx;
+    private static String serverBase = "http://fhir-dev.healthintersections.com.au/open";
+    private static IGenericClient client;
 
     public static FHIRInterface getInstance() {
+        ctx = FhirContext.forDstu2();
+        client = ctx.newRestfulGenericClient(serverBase);
+
         return ourInstance;
     }
 
     private FHIRInterface() {
     }
 
-    public Medication createMedication(long sctid, String name) {
+    private Medication createMedication(long sctid, String name) {
         Medication medication = new Medication();
         medication.setName(name);
-        List<CodingDt> codedMedicine = new ArrayList<CodingDt>();
+        List<CodingDt> codedMedicine = new ArrayList<>();
         // setSystem is wrong for v3, need to find the right URI
-        //codedMedicine.add(new CodingDt().setDisplay(name).setCode(sctid.toString()).setSystem("http://nehta.gov.au/amt/v3"));
+        codedMedicine.add(new CodingDt().setDisplay(name).setCode(String.valueOf(sctid)).setSystem("http://nehta.gov.au/amt/v3"));
         medication.setCode(new CodeableConceptDt().setCoding(codedMedicine));
 
         return medication;
     }
 
-    public MedicationAdministration createMedicationAdministration() {
+    private MedicationAdministration createMedicationAdministration() {
 
         MedicationAdministration medicationAdministration = new MedicationAdministration();
-        medicationAdministration.setEffectiveTime(new DateTimeDt().withCurrentTime()).setStatus(MedicationAdministrationStatusEnum.COMPLETED);
+        medicationAdministration.setEffectiveTime(DateTimeDt.withCurrentTime()).setStatus(MedicationAdministrationStatusEnum.COMPLETED);
+
+        return medicationAdministration;
     }
 
     // SCTID 65384011000036101 in AMT is "Strepsils honey and lemon lozenge"

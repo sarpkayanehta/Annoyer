@@ -9,8 +9,7 @@
         android:id="@+id/list_item_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
         android:paddingLeft="8dp"
         android:textStyle="bold" />
 
@@ -28,7 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/timeText"
-        android:layout_marginRight="10dp"
         android:text="Taken" />
 
 

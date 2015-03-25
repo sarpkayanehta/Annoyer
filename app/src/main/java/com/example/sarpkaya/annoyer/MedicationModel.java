@@ -46,7 +46,7 @@ public class MedicationModel {
     }
 
     public void takeMedication() {
-        FHIRInterface.getInstance().tookMedication(sctid);
+        //FHIRInterface.getInstance().tookMedication(sctid);
         this.setMedicationTakenTime(DateTimeDt.withCurrentTime());
     }
 }

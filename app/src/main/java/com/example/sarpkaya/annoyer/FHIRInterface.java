@@ -39,7 +39,7 @@ public class FHIRInterface {
         medication.setName(name);
         List<CodingDt> codedMedicine = new ArrayList<CodingDt>();
         // setSystem is wrong for v3, need to find the right URI
-        codedMedicine.add(new CodingDt().setDisplay(name).setCode(sctid.toString()).setSystem("http://nehta.gov.au/amt/v3"));
+        //codedMedicine.add(new CodingDt().setDisplay(name).setCode(sctid.toString()).setSystem("http://nehta.gov.au/amt/v3"));
         medication.setCode(new CodeableConceptDt().setCoding(codedMedicine));
 
 

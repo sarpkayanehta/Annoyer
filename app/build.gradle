@@ -22,5 +22,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'ca.uhn.hapi.fhir:hapi-fhir-android:0.9'
+    compile files('libs/hapi-fhir-android-0.9.jar')
 }

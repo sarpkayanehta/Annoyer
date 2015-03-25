@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import ca.uhn.fhir.context.FhirContext;
+
 
 public class Medications extends ActionBarActivity {
 
@@ -33,7 +35,10 @@ public class Medications extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    void someMethod() {
+        FhirContext ctx = FhirContext.forDstu2();
     }
 }

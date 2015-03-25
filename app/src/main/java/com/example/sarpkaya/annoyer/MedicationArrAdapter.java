@@ -10,19 +10,20 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by SarpKaya on 25/03/2015.
  */
 public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
-    private ArrayList<String> list = new ArrayList<String>();
+    private List<MedicationModel> list;
     private Context context;
 
 
 
-    public MedicationArrAdapter(ArrayList<String> list, Context context) {
-        this.list = list;
+    public MedicationArrAdapter(Context context) {
         this.context = context;
+        list = PatientMedications.getInstance().getMedicationModelList();
     }
 
     @Override
@@ -37,8 +38,7 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
 
     @Override
     public long getItemId(int pos) {
-        return 1;
-        //just return 0 if your list items do not have an Id variable.
+        return list.get(pos).getSctid();
     }
 
     @Override
@@ -51,16 +51,18 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
 
         //Handle TextView and display string from your list
         TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
-        listItemText.setText(list.get(position));
+        listItemText.setText(list.get(position).getName());
 
-        //Handle buttons and add onClickListeners
-        //TextView timeText = (TextView)view.findViewById(R.id.timeText);
+        TextView timeText = (TextView)view.findViewById(R.id.timeText);
+        timeText.setText(list.get(position).getMedicationTimeToBeTaken().toString());
+
         Button addBtn = (Button)view.findViewById(R.id.taken_btn);
+        addBtn.setEnabled(!list.get(position).isMedicationTaken());
 
         addBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //do something
+                list.get(position).takeMedication();
                 notifyDataSetChanged();
             }
         });

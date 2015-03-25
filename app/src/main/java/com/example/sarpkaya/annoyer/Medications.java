@@ -23,14 +23,8 @@ public class Medications extends ActionBarActivity {
     }
 
     private void doListStuff() {
-        //generate list
-        ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0 ; i < 100; i++) {
-            list.add("item " + i);
-        }
-
         //instantiate custom adapter
-        MedicationArrAdapter adapter = new MedicationArrAdapter(list, this);
+        MedicationArrAdapter adapter = new MedicationArrAdapter(this);
 
         //handle listview and assign adapter
         ListView lView = (ListView)findViewById(R.id.medicationListView);

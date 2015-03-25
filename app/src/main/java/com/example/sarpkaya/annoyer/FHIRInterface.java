@@ -2,9 +2,18 @@ package com.example.sarpkaya.annoyer;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.dstu.composite.ResourceReferenceDt;
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
+import ca.uhn.fhir.model.dstu2.composite.CodingDt;
+import ca.uhn.fhir.model.dstu2.resource.Medication;
 import ca.uhn.fhir.model.dstu2.resource.MedicationAdministration;
 import ca.uhn.fhir.model.dstu2.valueset.MedicationAdministrationStatusEnum;
+import ca.uhn.fhir.model.primitive.DateTimeDt;
+import java.util.List;
 
 /**
  * Created by VadimPeretokin on 25/03/15.
@@ -21,15 +30,25 @@ public class FHIRInterface {
 
     // SCTID 65384011000036101 in AMT is "Strepsils honey and lemon lozenge"
     // creates a FHIR MedicationAdministration resource with the taken medication at current time
-    public void tookMedication(long sctid) {
+    public void tookMedication(long sctid, String name) {
 
         FhirContext ctx = FhirContext.forDstu2();
 
         MedicationAdministration medicationAdministration = new MedicationAdministration();
 
-        medicationAdministration.setStatus(MedicationAdministrationStatusEnum.COMPLETED);
+        medicationAdministration.setEffectiveTime(new DateTimeDt().withCurrentTime()).setStatus(MedicationAdministrationStatusEnum.COMPLETED);
 
-        String jsonEncoded = ctx.newJsonParser().encodeResourceToString(medicationAdministration);
+        Medication medication = new Medication();
+        medication.setName(name);
+        List<CodingDt> codedMedicine = new ArrayList<CodingDt>();
+        // setSystem is wrong for v3, need to find the right URI
+        codedMedicine.add(new CodingDt().setDisplay(name).setCode(sctid.toString()).setSystem("http://nehta.gov.au/amt/v3"));
+        medication.setCode(new CodeableConceptDt().setCoding(codedMedicine));
+
+//        medicationAdministration.setMedication((ResourceReferenceDt) medication);
+
+
+        String jsonEncoded = ctx.newJsonParser().encodeResourceToString(medication);
         Log.d("resource", jsonEncoded);
     }
 }

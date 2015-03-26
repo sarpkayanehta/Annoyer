@@ -7,6 +7,8 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 /**
@@ -20,11 +22,13 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     public void notifyPhone(MedicationModel medication, Context context) {
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.warning_sign)
                         .setContentTitle("Medication Time")
-                        .setContentText(medication.getName());
+                        .setContentText(medication.getName())
+                        .setSound(soundUri);
         Intent resultIntent = new Intent(context, Medications.class);
         mBuilder.setOngoing(true);
         mBuilder.setAutoCancel(true);

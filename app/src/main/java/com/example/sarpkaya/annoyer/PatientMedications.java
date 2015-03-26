@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.MedicationAdministration;
@@ -16,6 +18,8 @@ import ca.uhn.fhir.model.primitive.DateTimeDt;
  */
 public class PatientMedications {
     private static PatientMedications instance;
+    private static final long ONE_MINUTE_IN_MILLIS=60000;//millisecs
+    private static final Random random = new Random();
 
     public List<MedicationModel> getMedicationModelList() {
         return medicationModelList;
@@ -68,10 +72,13 @@ public class PatientMedications {
 
     }
 
+
+
     private MedicationModel builder(String name, Long id, DateTimeDt time) {
         MedicationModel medicationModel = new MedicationModel();
         medicationModel.setName(name);
         medicationModel.setSctid(id);
+        time.setValue(new Date(time.getValue().getTime() + (random.nextInt(12) * ONE_MINUTE_IN_MILLIS)));
         medicationModel.setMedicationTimeToBeTaken(time);
         new AlarmService(context, medicationModel).startAlarm();
         return medicationModel;

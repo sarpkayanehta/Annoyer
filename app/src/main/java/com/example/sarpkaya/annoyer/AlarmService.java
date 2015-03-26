@@ -27,7 +27,6 @@ public class AlarmService {
         //Set the alarm to 10 seconds from now
         Calendar c = Calendar.getInstance();
         c.setTime(medicationModel.getMedicationTimeToBeTaken().getValue());
-        c.add(Calendar.SECOND, 15);
         long firstTime = c.getTimeInMillis();
         // Schedule the alarm!
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);

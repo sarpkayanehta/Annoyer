@@ -23,11 +23,13 @@ import java.util.List;
 public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
     private List<MedicationModel> list;
     private Context context;
+    private MedicationArrAdapter currObj;
 
 
 
     public MedicationArrAdapter(Context context) {
         this.context = context;
+        currObj = this;
         list = PatientMedications.getInstance().getMedicationModelList();
     }
 
@@ -64,12 +66,14 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
 
         Button addBtn = (Button)view.findViewById(R.id.taken_btn);
         //addBtn.setEnabled(!list.get(position).isMedicationTaken());
-        if (!list.get(position).isMedicationTaken()) addBtn.setBackgroundColor(Color.GREEN);
+        if (list.get(position).getMedicationTakenTime() != null) addBtn.setBackgroundColor(Color.YELLOW);
+        if (list.get(position).isMedicationTaken()) addBtn.setBackgroundColor(Color.GREEN);
 
         addBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 list.get(position).takeMedication();
+                FHIRInterface.getInstance().tookMedication(list.get(position), currObj);
                 notifyDataSetChanged();
             }
         });

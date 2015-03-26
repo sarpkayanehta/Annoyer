@@ -8,8 +8,8 @@ import ca.uhn.fhir.model.primitive.DateTimeDt;
 public class MedicationModel implements Serializable {
     private String name;
     private Long sctid;
-    private DateTimeDt medicationTimeToBeTaken;
-    private DateTimeDt medicationTakenTime;
+    transient private DateTimeDt medicationTimeToBeTaken;
+    transient private DateTimeDt medicationTakenTime;
     private Boolean medicationTaken;
 
     public MedicationModel() {

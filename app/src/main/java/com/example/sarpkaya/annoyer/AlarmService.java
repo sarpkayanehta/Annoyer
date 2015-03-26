@@ -14,17 +14,20 @@ import java.util.Calendar;
 public class AlarmService {
     private Context context;
     private PendingIntent mAlarmSender;
+    private final MedicationModel medicationModel;
     public AlarmService(Context context, MedicationModel medicationModel) {
         this.context = context;
+        this.medicationModel = medicationModel;
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra("model", medicationModel);
-        mAlarmSender = PendingIntent.getBroadcast(context, 0,intent , 0);
+        mAlarmSender = PendingIntent.getBroadcast(context, (int)(long)medicationModel.getSctid(),intent , 0);
     }
 
     public void startAlarm(){
         //Set the alarm to 10 seconds from now
         Calendar c = Calendar.getInstance();
-        c.add(Calendar.SECOND, 5);
+        c.setTime(medicationModel.getMedicationTimeToBeTaken().getValue());
+        c.add(Calendar.SECOND, 15);
         long firstTime = c.getTimeInMillis();
         // Schedule the alarm!
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);

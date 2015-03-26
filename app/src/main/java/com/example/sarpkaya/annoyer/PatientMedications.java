@@ -1,5 +1,6 @@
 package com.example.sarpkaya.annoyer;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -14,25 +15,27 @@ import ca.uhn.fhir.model.primitive.DateTimeDt;
  * Created by VadimPeretokin on 25/03/15.
  */
 public class PatientMedications {
-    private static PatientMedications ourInstance = new PatientMedications();
+    private static PatientMedications instance;
 
     public List<MedicationModel> getMedicationModelList() {
         return medicationModelList;
     }
 
     private List<MedicationModel> medicationModelList;
+    private Context context;
 
-    public static PatientMedications getInstance() {
-        return ourInstance;
+    public static PatientMedications getInstance(Context context) {
+        if (instance == null) instance = new PatientMedications(context);
+        return instance;
     }
 
-    private PatientMedications() {
+    private PatientMedications(Context context) {
+        this.context = context;
         populateMedications();
     }
 
     private void populateMedications() {
         medicationModelList = new ArrayList<>();
-        MedicationModel medicationModel = new MedicationModel();
 
         medicationModelList.add(builder("memantine hydrochloride 20 mg tablet",
                 83436011000036100L, DateTimeDt.withCurrentTime()));
@@ -70,6 +73,7 @@ public class PatientMedications {
         medicationModel.setName(name);
         medicationModel.setSctid(id);
         medicationModel.setMedicationTimeToBeTaken(time);
+        new AlarmService(context, medicationModel).startAlarm();
         return medicationModel;
     }
 }

@@ -32,7 +32,7 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
     public MedicationArrAdapter(Context context) {
         this.context = context;
         currObj = this;
-        list = PatientMedications.getInstance().getMedicationModelList();
+        list = PatientMedications.getInstance(context).getMedicationModelList();
     }
 
     @Override

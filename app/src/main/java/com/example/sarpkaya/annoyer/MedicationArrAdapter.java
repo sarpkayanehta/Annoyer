@@ -87,11 +87,12 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.warning_sign)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+                        .setContentTitle("Medication Time")
+                        .setContentText("Lorem ipsum medication name here to click dissssmissssssss");
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(context, Medications.class);
-
+        mBuilder.setOngoing(true);
+        mBuilder.setAutoCancel(true);
 // The stack builder object will contain an artificial back stack for the
 // started Activity.
 // This ensures that navigating backward from the Activity leads out of
@@ -111,26 +112,5 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 // mId allows you to update the notification later on.
         mNotificationManager.notify(1, mBuilder.build());
-    }
-
-    public void anotherNotify() {
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.warning_sign)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
-
-        Intent resultIntent = new Intent(context, Medications.class);
-
-// Because clicking the notification opens a new ("special") activity, there's
-// no need to create an artificial back stack.
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        context,
-                        0,
-                        resultIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-
     }
 }

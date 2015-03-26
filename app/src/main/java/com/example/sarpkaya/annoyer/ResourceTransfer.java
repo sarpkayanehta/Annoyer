@@ -10,7 +10,7 @@ import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.IGenericClient;
 
 // this should really be just a two-value thing
-public class ResourceTranfer extends AsyncTask<ArrayList<Object>, Integer, MethodOutcome> {
+public class ResourceTransfer extends AsyncTask<ArrayList<Object>, Integer, MethodOutcome> {
     @Override
     protected MethodOutcome doInBackground(ArrayList<Object>... params) {
         MethodOutcome outcome = ((IGenericClient) params[0].get(1)).create()

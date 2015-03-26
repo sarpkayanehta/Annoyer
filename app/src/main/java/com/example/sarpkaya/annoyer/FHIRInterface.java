@@ -55,7 +55,7 @@ public class FHIRInterface {
         list.add((Object) medicationAdministration);
         list.add((Object) client);
 
-        new ResourceTranfer().execute(list);
+        new ResourceTransfer().execute(list);
     }
 
     // SCTID 65384011000036101 in AMT is "Strepsils honey and lemon lozenge"

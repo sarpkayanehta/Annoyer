@@ -39,14 +39,19 @@ public class PatientMedications {
         medicationModel.setSctid(65384011000036101L);
         DateTimeDt timeToTakeMedication = DateTimeDt.withCurrentTime();
         medicationModel.setMedicationTimeToBeTaken(timeToTakeMedication);
-
         medicationModelList.add(medicationModel);
 
         medicationModel = new MedicationModel();
-        medicationModel.setName("A");
-        medicationModel.setSctid(653840110000361L);
+        medicationModel.setName("memantine hydrochloride 20 mg tablet");
+        medicationModel.setSctid(83436011000036100L);
         medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-
         medicationModelList.add(medicationModel);
+
+        medicationModel = new MedicationModel();
+        medicationModel.setName("potassium chloride 0.15% (750 mg/500 mL) + sodium chloride 0.225% (1.125 g/500 mL) + glucose 3.75% (18.75 g/500 mL) injection, bag");
+        medicationModel.setSctid(70194011000036104L);
+        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
+        medicationModelList.add(medicationModel);
+
     }
 }

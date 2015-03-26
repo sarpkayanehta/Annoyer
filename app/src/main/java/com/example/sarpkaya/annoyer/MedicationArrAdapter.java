@@ -65,7 +65,7 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
         timeText.setText(dateFormat.format(list.get(position).getMedicationTimeToBeTaken().getValue()));
 
         Button addBtn = (Button)view.findViewById(R.id.taken_btn);
-        //addBtn.setEnabled(!list.get(position).isMedicationTaken());
+        addBtn.setEnabled(!list.get(position).isMedicationTaken());
         if (list.get(position).getMedicationTakenTime() != null) addBtn.setBackgroundColor(Color.YELLOW);
         if (list.get(position).isMedicationTaken()) addBtn.setBackgroundColor(Color.GREEN);
 

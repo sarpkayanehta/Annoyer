@@ -1,6 +1,7 @@
 package com.example.sarpkaya.annoyer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
 
         Button addBtn = (Button)view.findViewById(R.id.taken_btn);
         //addBtn.setEnabled(!list.get(position).isMedicationTaken());
+        if (!list.get(position).isMedicationTaken()) addBtn.setBackgroundColor(Color.GREEN);
 
         addBtn.setOnClickListener(new View.OnClickListener(){
             @Override

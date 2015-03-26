@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -69,6 +72,14 @@ public class PatientMedications {
                 70194011000036104L, DateTimeDt.withCurrentTime()));
 
         medicationModelList.add(builder("moxonidine 200 microgram tablet", 22059011000036104L, DateTimeDt.withCurrentTime()));
+
+        Collections.sort(medicationModelList, new Comparator<MedicationModel>() {
+            @Override
+            public int compare(MedicationModel o1, MedicationModel o2) {
+                return (int) (o1.getMedicationTimeToBeTaken().getValue().getTime()
+                        - o2.getMedicationTimeToBeTaken().getValue().getTime());
+            }
+        });
 
     }
 

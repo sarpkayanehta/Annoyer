@@ -1,7 +1,5 @@
 package com.example.sarpkaya.annoyer;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,14 +45,22 @@ public class FHIRInterface {
         MedicationAdministration medicationAdministration = new MedicationAdministration();
         medicationAdministration.setEffectiveTime(DateTimeDt.withCurrentTime()).setStatus(MedicationAdministrationStatusEnum.COMPLETED);
 
+        medicationAdministration.getPatient().setReference("Patient/example");
+
         return medicationAdministration;
+    }
+
+    private void sendMedicationAdministration(MedicationAdministration medicationAdministration) {
+        ArrayList<Object> list = new ArrayList<>();
+        list.add((Object) medicationAdministration);
+        list.add((Object) client);
+
+        new ResourceTranfer().execute(list);
     }
 
     // SCTID 65384011000036101 in AMT is "Strepsils honey and lemon lozenge"
     // creates a FHIR MedicationAdministration resource with the taken medication at current time
     public void tookMedication(long sctid, String name) {
-
-        FhirContext ctx = FhirContext.forDstu2();
 
         // create a Medication
         Medication medication = createMedication(sctid, name);
@@ -65,7 +71,7 @@ public class FHIRInterface {
         // Put the Medication as a contained reference in the MedicationAdministration resource
         medicationAdministration.getMedication().setResource(medication);
 
-        String jsonEncoded = ctx.newJsonParser().encodeResourceToString(medicationAdministration);
-        Log.d("resource", jsonEncoded);
+        // mail the resource off to the server. Hope our network is fine and all that.
+        sendMedicationAdministration(medicationAdministration);
     }
 }

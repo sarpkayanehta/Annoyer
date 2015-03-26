@@ -1,9 +1,11 @@
 package com.example.sarpkaya.annoyer;
 
+import java.io.Serializable;
+
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 
 
-public class MedicationModel {
+public class MedicationModel implements Serializable {
     private String name;
     private Long sctid;
     private DateTimeDt medicationTimeToBeTaken;

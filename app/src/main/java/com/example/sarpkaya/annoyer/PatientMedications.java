@@ -34,67 +34,42 @@ public class PatientMedications {
         medicationModelList = new ArrayList<>();
         MedicationModel medicationModel = new MedicationModel();
 
-        //Medications
-        medicationModel = new MedicationModel();
-        medicationModel.setName("memantine hydrochloride 20 mg tablet");
-        medicationModel.setSctid(83436011000036100L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("memantine hydrochloride 20 mg tablet",
+                83436011000036100L, DateTimeDt.withCurrentTime()));
 
-        medicationModel = new MedicationModel();
-        medicationModel.setName("econazole nitrate 1% (10 mg/g) cream");
-        medicationModel.setSctid(61893011000036101L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("econazole nitrate 1% (10 mg/g) cream",
+                61893011000036101L, DateTimeDt.withCurrentTime()));
 
-        medicationModel = new MedicationModel();
-        medicationModel.setName("idarubicin hydrochloride 10 mg/10 mL injection, vial");
-        medicationModel.setSctid(33681011000036108L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("idarubicin hydrochloride 10 mg/10 mL injection, vial",
+                33681011000036108L, DateTimeDt.withCurrentTime()));
 
-        medicationModel = new MedicationModel();
-        medicationModel.setName("dressing foam with silver 7.5 cm x 7.5 cm dressing");
-        medicationModel.setSctid(933241091000036109L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("dressing foam with silver 7.5 cm x 7.5 cm dressing",
+                933241091000036109L, DateTimeDt.withCurrentTime()));
 
-        medicationModel = new MedicationModel();
-        medicationModel.setName("lamotrigine 100 mg tablet");
-        medicationModel.setSctid(23610011000036100L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("lamotrigine 100 mg tablet",
+                23610011000036100L, DateTimeDt.withCurrentTime()));
 
-        medicationModel = new MedicationModel();
-        medicationModel.setName("temozolomide 5 mg capsule");
-        medicationModel.setSctid(22983011000036102L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("temozolomide 5 mg capsule",
+                22983011000036102L, DateTimeDt.withCurrentTime()));
 
-        medicationModel = new MedicationModel();
-        medicationModel.setName("aspirin 500 mg + codeine phosphate hemihydrate 8 mg tablet: dispersible");
-        medicationModel.setSctid(61935011000036104L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("aspirin 500 mg + codeine phosphate hemihydrate 8 mg tablet: dispersible",
+                61935011000036104L, DateTimeDt.withCurrentTime()));
 
-        medicationModel = new MedicationModel();
-        medicationModel.setName("fluticasone propionate 500 microgram/actuation inhalation: powder for, actuation");
-        medicationModel.setSctid(22752011000036107L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("fluticasone propionate 500 microgram/actuation inhalation: powder for, actuation",
+                22752011000036107L, DateTimeDt.withCurrentTime()));
 
-        medicationModel = new MedicationModel();
-        medicationModel.setName("potassium chloride 0.15% (750 mg/500 mL) + sodium chloride 0.225% (1.125 g/500 mL) + glucose 3.75% (18.75 g/500 mL) injection, bag");
-        medicationModel.setSctid(70194011000036104L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("potassium chloride 0.15% (750 mg/500 mL) + sodium chloride 0.225% (1.125 g/500 mL) + glucose 3.75% (18.75 g/500 mL) injection, bag",
+                70194011000036104L, DateTimeDt.withCurrentTime()));
 
-        medicationModel = new MedicationModel();
-        medicationModel.setName("moxonidine 200 microgram tablet");
-        medicationModel.setSctid(22059011000036104L);
-        medicationModel.setMedicationTimeToBeTaken(DateTimeDt.withCurrentTime());
-        medicationModelList.add(medicationModel);
+        medicationModelList.add(builder("moxonidine 200 microgram tablet", 22059011000036104L, DateTimeDt.withCurrentTime()));
 
+    }
 
+    private MedicationModel builder(String name, Long id, DateTimeDt time) {
+        MedicationModel medicationModel = new MedicationModel();
+        medicationModel.setName(name);
+        medicationModel.setSctid(id);
+        medicationModel.setMedicationTimeToBeTaken(time);
+        return medicationModel;
     }
 }

@@ -42,6 +42,7 @@ public class ResourceTransfer extends AsyncTask<Object, Integer, MethodOutcome> 
             System.out.println("Got ID: " + id.getValue());
             medicationModel.setMedicationTaken(result.getCreated());
             medicationArrAdapter.notifyDataSetChanged();
+            medicationArrAdapter.notifyPhone();
         }
     }
 }

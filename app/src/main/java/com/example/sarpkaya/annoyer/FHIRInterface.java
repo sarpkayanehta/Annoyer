@@ -18,18 +18,17 @@ import ca.uhn.fhir.rest.client.IGenericClient;
 
 public class FHIRInterface {
     private static FHIRInterface ourInstance = new FHIRInterface();
-    private static FhirContext ctx;
-    private static String serverBase = "http://fhir-dev.healthintersections.com.au/open";
-    private static IGenericClient client;
+    private final FhirContext ctx;
+    private final String serverBase = "http://fhir-dev.healthintersections.com.au/open";
+    private final IGenericClient client;
 
     public static FHIRInterface getInstance() {
-        ctx = FhirContext.forDstu2();
-        client = ctx.newRestfulGenericClient(serverBase);
-
         return ourInstance;
     }
 
     private FHIRInterface() {
+        ctx = FhirContext.forDstu2();
+        client = ctx.newRestfulGenericClient(serverBase);
     }
 
     private Medication createMedication(long sctid, String name) {

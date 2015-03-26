@@ -51,11 +51,7 @@ public class FHIRInterface {
     }
 
     private void sendMedicationAdministration(MedicationAdministration medicationAdministration) {
-        ArrayList<Object> list = new ArrayList<>();
-        list.add((Object) medicationAdministration);
-        list.add((Object) client);
-
-        new ResourceTransfer().execute(list);
+        new ResourceTransfer().execute(medicationAdministration, client);
     }
 
     // SCTID 65384011000036101 in AMT is "Strepsils honey and lemon lozenge"

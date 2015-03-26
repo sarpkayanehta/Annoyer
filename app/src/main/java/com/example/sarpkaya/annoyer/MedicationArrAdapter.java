@@ -75,11 +75,17 @@ public class MedicationArrAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 list.get(position).takeMedication();
+                cancelNotification(currObj.context,(int)(long)list.get(position).getSctid());
                 FHIRInterface.getInstance().tookMedication(list.get(position), currObj);
                 notifyDataSetChanged();
             }
         });
 
         return view;
+    }
+    private void cancelNotification(Context ctx, int notifyId) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancel(notifyId);
     }
 }

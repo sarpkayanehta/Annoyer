@@ -39,6 +39,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify((int)((long)medication.getSctid()), mBuilder.build());
+        mNotificationManager.notify((int)(long)medication.getSctid(), mBuilder.build());
     }
 }
